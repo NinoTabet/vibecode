@@ -1,0 +1,77 @@
+[debug] [2025-04-26T11:17:39.381Z] ----------------------------------------------------------------------
+[debug] [2025-04-26T11:17:39.383Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Pc\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-04-26T11:17:39.384Z] CLI Version:   14.2.1
+[debug] [2025-04-26T11:17:39.384Z] Platform:      win32
+[debug] [2025-04-26T11:17:39.384Z] Node Version:  v22.13.1
+[debug] [2025-04-26T11:17:39.384Z] Time:          Sat Apr 26 2025 18:17:39 GMT+0700 (Indochina Time)
+[debug] [2025-04-26T11:17:39.384Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-26T11:17:39.514Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-26T11:17:39.514Z] > authorizing via signed-in user (anthonydavidtabet@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Pc\Desktop\Vibe coding
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-04-26T11:17:49.574Z] Using project from CLI flag: vibecodesesh
+[debug] [2025-04-26T11:17:49.575Z] Checked if tokens are valid: true, expires at: 1745669157279
+[debug] [2025-04-26T11:17:49.575Z] Checked if tokens are valid: true, expires at: 1745669157279
+[debug] [2025-04-26T11:17:49.576Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vibecodesesh [none]
+[debug] [2025-04-26T11:17:50.107Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/vibecodesesh 200
+[debug] [2025-04-26T11:17:50.107Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/vibecodesesh {"projectId":"vibecodesesh","projectNumber":"27040016031","displayName":"VibeCodeSesh","name":"projects/vibecodesesh","resources":{"hostingSite":"vibecodesesh"},"state":"ACTIVE","etag":"1_b341b81e-188b-4956-9e69-574b3aad33e6"}
+[info] i  Using project vibecodesesh (VibeCodeSesh) 
+[info] 
+=== Functions Setup
+[debug] [2025-04-26T11:17:50.115Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-26T11:17:50.115Z] > authorizing via signed-in user (anthonydavidtabet@gmail.com)
+[debug] [2025-04-26T11:17:50.115Z] [iam] checking project vibecodesesh for permissions ["firebase.projects.get"]
+[debug] [2025-04-26T11:17:50.115Z] Checked if tokens are valid: true, expires at: 1745669157279
+[debug] [2025-04-26T11:17:50.116Z] Checked if tokens are valid: true, expires at: 1745669157279
+[debug] [2025-04-26T11:17:50.116Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/vibecodesesh:testIamPermissions [none]
+[debug] [2025-04-26T11:17:50.116Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/vibecodesesh:testIamPermissions x-goog-quota-user=projects/vibecodesesh
+[debug] [2025-04-26T11:17:50.116Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/vibecodesesh:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-04-26T11:17:51.088Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/vibecodesesh:testIamPermissions 200
+[debug] [2025-04-26T11:17:51.088Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/vibecodesesh:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-04-26T11:17:51.088Z] Checked if tokens are valid: true, expires at: 1745669157279
+[debug] [2025-04-26T11:17:51.088Z] Checked if tokens are valid: true, expires at: 1745669157279
+[debug] [2025-04-26T11:17:51.089Z] Checked if tokens are valid: true, expires at: 1745669157279
+[debug] [2025-04-26T11:17:51.089Z] Checked if tokens are valid: true, expires at: 1745669157279
+[debug] [2025-04-26T11:17:51.089Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/vibecodesesh/services/cloudfunctions.googleapis.com [none]
+[debug] [2025-04-26T11:17:51.089Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/vibecodesesh/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/vibecodesesh
+[debug] [2025-04-26T11:17:51.090Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/vibecodesesh/services/runtimeconfig.googleapis.com [none]
+[debug] [2025-04-26T11:17:51.090Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/vibecodesesh/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/vibecodesesh
+[debug] [2025-04-26T11:17:52.352Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/vibecodesesh/services/cloudfunctions.googleapis.com 200
+[debug] [2025-04-26T11:17:52.352Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/vibecodesesh/services/cloudfunctions.googleapis.com [omitted]
+[debug] [2025-04-26T11:17:52.371Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/vibecodesesh/services/runtimeconfig.googleapis.com 200
+[debug] [2025-04-26T11:17:52.371Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/vibecodesesh/services/runtimeconfig.googleapis.com [omitted]
+[info] 
+Detected existing codebase(s): default
+
+[info] Let's create a new codebase for your functions.
+[info] A directory corresponding to the codebase will be created in your project
+[info] with sample code pre-configured.
+
+[info] See https://firebase.google.com/docs/functions/organize-functions for
+[info] more information on organizing your functions using codebases.
+
+[info] Functions can be deployed with firebase deploy.
+
+[error] Invalid codebase name. Codebase must be less than 64 characters and can contain only lowercase letters, numeric characters, underscores, and dashes.
+[error] Invalid codebase name. Codebase must be less than 64 characters and can contain only lowercase letters, numeric characters, underscores, and dashes.

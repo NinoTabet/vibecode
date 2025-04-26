@@ -2,21 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import VibeEntry from '../components/VibeEntry';
 import VibeStats from '../components/VibeStats';
-import config from '../config';
 
 function Home() {
   const [vibes, setVibes] = useState([]);
 
-  useEffect(() => {
-    const fetchVibes = async () => {
-      try {
-        const response = await axios.get(`${config.apiBaseUrl}/api/vibes`);
-        setVibes(response.data);
-      } catch (error) {
-        console.error('Error fetching vibes:', error);
-      }
-    };
+  const fetchVibes = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/api/vibes');
+      setVibes(response.data);
+    } catch (err) {
+      console.error('Failed to fetch vibes:', err);
+    }
+  };
 
+  useEffect(() => {
     fetchVibes();
   }, []);
 
@@ -28,22 +27,24 @@ function Home() {
     <div className="home">
       <h1>Daily Vibe Journal</h1>
       <div className="content">
-        <VibeEntry onVibeAdded={handleVibeAdded} />
+        <div className="entry-section">
+          <VibeEntry onVibeAdded={handleVibeAdded} />
+        </div>
+        <div className="stats-section">
+          <VibeStats />
+        </div>
         <div className="recent-vibes">
           <h2>Recent Vibes</h2>
-          <div className="vibe-list">
-            {vibes.map((vibe) => (
-              <div key={vibe.id} className="vibe-item">
-                <span className="vibe-emoji">{vibe.emoji}</span>
-                <p className="vibe-note">{vibe.note}</p>
-                <span className="vibe-date">
-                  {new Date(vibe.timestamp).toLocaleDateString()}
-                </span>
-              </div>
-            ))}
-          </div>
+          {vibes.map((vibe) => (
+            <div key={vibe.id} className="vibe-card">
+              <span className="emoji">{vibe.emoji}</span>
+              <p className="note">{vibe.note}</p>
+              <span className="date">
+                {new Date(vibe.date).toLocaleDateString()}
+              </span>
+            </div>
+          ))}
         </div>
-        <VibeStats />
       </div>
     </div>
   );
