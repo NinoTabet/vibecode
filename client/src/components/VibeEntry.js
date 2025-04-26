@@ -1,31 +1,38 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
-const emojiOptions = ['😊', '😢', '😡', '😴', '🤔', '😍', '😎', '😭', '🤯', '🥳'];
+import config from '../config';
 
 function VibeEntry({ onVibeAdded }) {
-  const [emoji, setEmoji] = useState('');
+  const [selectedEmoji, setSelectedEmoji] = useState('');
   const [note, setNote] = useState('');
   const [error, setError] = useState('');
 
+  const emojis = ['😊', '😢', '😡', '😴', '🤔', '😎', '🥳', '😷'];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!emoji || !note) {
-      setError('Please select an emoji and write a note');
+    setError('');
+
+    if (!selectedEmoji || !note) {
+      setError('Please select an emoji and enter a note');
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/api/vibes', {
-        emoji,
-        note
+      const response = await axios.post(`${config.apiBaseUrl}/api/vibes`, {
+        emoji: selectedEmoji,
+        note: note
       });
-      onVibeAdded(response.data);
-      setEmoji('');
+
+      if (onVibeAdded) {
+        onVibeAdded(response.data);
+      }
+
+      setSelectedEmoji('');
       setNote('');
-      setError('');
     } catch (err) {
       setError('Failed to save your vibe. Please try again.');
+      console.error('Error saving vibe:', err);
     }
   };
 
@@ -34,27 +41,25 @@ function VibeEntry({ onVibeAdded }) {
       <h2>How are you feeling today?</h2>
       <form onSubmit={handleSubmit}>
         <div className="emoji-selector">
-          {emojiOptions.map((option) => (
+          {emojis.map((emoji) => (
             <button
-              key={option}
+              key={emoji}
               type="button"
-              className={`emoji-btn ${emoji === option ? 'selected' : ''}`}
-              onClick={() => setEmoji(option)}
+              className={`emoji-button ${selectedEmoji === emoji ? 'selected' : ''}`}
+              onClick={() => setSelectedEmoji(emoji)}
             >
-              {option}
+              {emoji}
             </button>
           ))}
         </div>
-        <div className="note-input">
-          <textarea
-            placeholder="Write a short note about your day..."
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-            maxLength="200"
-          />
-        </div>
-        {error && <p className="error">{error}</p>}
-        <button type="submit" className="submit-btn">
+        <textarea
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          placeholder="Write a note about your feelings..."
+          rows="3"
+        />
+        {error && <div className="error">{error}</div>}
+        <button type="submit" className="submit-button">
           Save Vibe
         </button>
       </form>

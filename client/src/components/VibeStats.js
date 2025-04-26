@@ -1,41 +1,30 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { format } from 'date-fns';
-
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D', '#FFC658', '#FF7C43', '#A4DE6C', '#D0ED57'];
+import { BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, Cell } from 'recharts';
+import config from '../config';
 
 function VibeStats() {
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({
+    dailyVibes: [],
+    emojiDistribution: {}
+  });
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/vibes/stats');
+        const response = await axios.get(`${config.apiBaseUrl}/api/vibes/stats`);
         setStats(response.data);
-        setLoading(false);
-      } catch (err) {
-        console.error('Failed to fetch stats:', err);
-        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching stats:', error);
       }
     };
 
     fetchStats();
   }, []);
 
-  if (loading) return <div>Loading statistics...</div>;
-  if (!stats) return <div>No data available</div>;
+  const COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD'];
 
-  // Prepare data for the bar chart (daily vibes)
-  const dailyData = Object.entries(stats.dailyVibes).map(([date, vibes]) => ({
-    date: format(new Date(date), 'MMM d'),
-    count: vibes.length
-  }));
-
-  // Prepare data for the pie chart (emoji distribution)
-  const emojiData = Object.entries(stats.emojiCount).map(([emoji, count]) => ({
+  const pieData = Object.entries(stats.emojiDistribution).map(([emoji, count], index) => ({
     name: emoji,
     value: count
   }));
@@ -44,39 +33,37 @@ function VibeStats() {
     <div className="vibe-stats">
       <h2>Your Vibe Statistics</h2>
       
-      <div className="chart-container">
-        <h3>Daily Vibes</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={dailyData}>
-            <CartesianGrid strokeDasharray="3 3" />
+      <div className="charts-container">
+        <div className="chart">
+          <h3>Daily Mood Trends</h3>
+          <BarChart width={500} height={300} data={stats.dailyVibes}>
             <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
             <Bar dataKey="count" fill="#8884d8" />
           </BarChart>
-        </ResponsiveContainer>
-      </div>
+        </div>
 
-      <div className="chart-container">
-        <h3>Emoji Distribution</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <PieChart>
+        <div className="chart">
+          <h3>Emoji Distribution</h3>
+          <PieChart width={400} height={300}>
             <Pie
-              data={emojiData}
-              dataKey="value"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
+              data={pieData}
+              cx={200}
+              cy={150}
+              labelLine={false}
               outerRadius={100}
-              label
+              fill="#8884d8"
+              dataKey="value"
+              label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
             >
-              {emojiData.map((entry, index) => (
+              {pieData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
             <Tooltip />
           </PieChart>
-        </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
